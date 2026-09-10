@@ -1,0 +1,265 @@
+/*! __________________________________________ 350 __________________________________________  */
+@media (max-width: 1300px) {
+
+    /* ______________________________________ Global ______________________________________  */
+    section .title h2 {
+        width: 100%;
+    }
+
+    section .title img {
+        max-width: 200px;
+    }
+
+    /* ______________________________________ Navbar ______________________________________  */
+    nav.navbar .container .navbar-brand {
+        width: 80px;
+    }
+
+    nav.navbar .container .navbar-toggler {
+        border-color: var(--main-color);
+    }
+
+    nav.navbar .container .navbar-toggler {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 45px;
+        height: 40px;
+    }
+
+    nav.navbar .container .navbar-toggler span {
+        display: block;
+        width: 70%;
+        height: 3px;
+        border-radius: 5px;
+        background-color: var(--main-color);
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition-duration: 0.5s;
+    }
+
+    nav.navbar .container .navbar-toggler span:nth-of-type(1) {
+        top: 25%;
+    }
+
+    nav.navbar .container .navbar-toggler span:nth-of-type(2) {
+        top: 50%;
+    }
+
+    nav.navbar .container .navbar-toggler span:nth-of-type(3) {
+        top: 75%;
+    }
+
+    nav.navbar .container .navbar-collapse {
+        background: -webkit-linear-gradient(to right, rgba(234, 234, 234), rgba(219, 219, 219), rgba(242, 242, 242), rgba(173, 169, 150));
+        background: linear-gradient(to right, rgba(234, 234, 234), rgba(219, 219, 219), rgba(242, 242, 242), rgba(173, 169, 150));
+    }
+
+    nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link {
+        width: fit-content;
+    }
+
+    /* ______________________________________ Header ______________________________________  */
+    #Home #Special-Carousel>button {
+        top: auto;
+        bottom: 10px;
+        width: 35px;
+        height: 35px;
+    }
+
+    #Home #Special-Carousel button.prev {
+        left: auto;
+        right: 80px;
+    }
+
+    #Home #Special-Carousel button.next {
+        right: 30px;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item h2 {
+        font-size: 30px;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item p {
+        width: 100%;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item {
+        justify-content: center;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:first-child {
+        max-width: 55%;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item.active .container .row .part2 .item img:first-child {
+        transform: translate(-10%, -35%);
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:last-child {
+        max-width: 75%;
+    }
+
+    /* ______________________________________ Latest ______________________________________ */
+    #Latest .container .content .product .row1 .part2 .item h3 {
+        font-size: 18px;
+    }
+
+    #Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul {
+        width: 100%;
+    }
+
+    /* ______________________________________ Featured ______________________________________ */
+    #Featured .container .content .row .product .item {
+        max-width: 300px;
+        margin: auto;
+    }
+
+    /* ______________________________________ Popup_Shop ______________________________________ */
+    .popup[data-popup-name="shop"] .box ,
+    .popup[data-popup-name="favorites"] .box {
+        max-width: 300px;
+    }
+
+    /* ______________________________________ Popup_Product ______________________________________ */
+    .popup[data-popup-name="product"] .box {
+        max-width: 300px;
+        align-self: start;
+        margin: 20px auto;
+    }
+}
+
+/*! __________________________________________ 450 __________________________________________  */
+@media (min-width: 371px) and (max-width: 1300px) {
+
+    /* ______________________________________ Header ______________________________________  */
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:first-child {
+        max-width: 200px;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:last-child {
+        max-width: 250px;
+    }
+
+    /* ______________________________________ Latest ______________________________________ */
+    #Latest .container .content .product {
+        max-width: 400px;
+        margin: auto;
+    }
+
+    #Latest .container .content .product .row1 .part2 .item h3 {
+        font-size: 22px;
+    }
+
+    /* ______________________________________ Popup_Product ______________________________________ */
+    .popup[data-popup-name="product"] .box {
+        max-width: 350px;
+    }
+}
+
+/*! __________________________________________ 650 __________________________________________  */
+@media (min-width: 577px) and (max-width: 1300px) {
+
+    /* ______________________________________ Header ______________________________________  */
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:first-child {
+        max-width: 45%;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:last-child {
+        max-width: 60%;
+    }
+
+    /* ______________________________________ Popup_Shop ______________________________________ */
+    .popup[data-popup-name="shop"] .box ,
+    .popup[data-popup-name="favorites"] .box {
+        max-width: initial;
+    }
+
+    /* ______________________________________ Popup_Product ______________________________________ */
+    .popup[data-popup-name="product"] .box {
+        max-width: 400px;
+    }
+
+}
+
+/*! __________________________________________ 850 __________________________________________  */
+@media (min-width: 769px) and (max-width: 1300px) {
+
+    /* ______________________________________ Header ______________________________________  */
+    #Home #Special-Carousel>button {
+        width: 45px;
+        height: 45px;
+    }
+
+    #Home #Special-Carousel button.next {
+        right: 50px;
+    }
+
+    #Home #Special-Carousel button.prev {
+        right: 110px;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:first-child {
+        max-width: 90%;
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item.active .container .row .part2 .item img:first-child {
+        transform: translate(-10%, -20%);
+    }
+
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:last-child {
+        max-width: 95%;
+    }
+
+    /* ______________________________________ Latest ______________________________________ */
+    #Latest .container .content .product {
+        max-width: 600px;
+    }
+
+    #Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul {
+        width: 90px;
+    }
+
+    #Latest .container .content .product .row1 .part2 .item h3 {
+        font-size: 26px;
+    }
+
+    /* ______________________________________ Popup_Product ______________________________________ */
+    .popup[data-popup-name="product"] .box {
+        max-width: initial;
+        align-self: initial;
+        margin: initial
+    }
+}
+
+/*! __________________________________________ 1050 __________________________________________  */
+@media (min-width: 992px) and (max-width: 1300px) {
+
+    /* ______________________________________ Global ______________________________________  */
+    section .title img {
+        max-width: 230px;
+    }
+
+    /* ______________________________________ Header ______________________________________ */
+    #Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item h2 {
+        font-size: 50px;
+    }
+
+    nav.navbar .container .navbar-toggler {
+        display: none;
+    }
+
+    nav.navbar .container .navbar-collapse {
+        background: none;
+    }
+
+    /* ______________________________________ Latest ______________________________________ */
+    #Latest .container .content .product {
+        max-width: initial;
+    }
+
+}
+
+/*! __________________________________________ 1250 __________________________________________  */
+@media (min-width: 1181px) and (max-width: 1300px) {}

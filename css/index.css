@@ -1,0 +1,647 @@
+/* _______________________________________________________ Start_Navbar _______________________________________________________ */
+nav.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+    background: rgb(255, 255, 255, 0.2);
+    box-shadow: 0 2px 10px var(--main-color-light);
+}
+
+nav.navbar.scrolled {
+    background: #fff;
+}
+
+nav.navbar .container .navbar-brand {
+    width: 8%;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link {
+    position: relative;
+    color: #3e3e3e;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 10px;
+    transition: 0s;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link.active {
+    color: var(--main-color);
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link::before,
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    border: 1px solid var(--main-color);
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link::before {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    transform: translateX(-20px);
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link::after {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0;
+    transform: translateX(20px);
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link:hover::before,
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link:hover::after,
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link.active::before,
+nav.navbar .container .navbar-collapse .navbar-nav:first-child .nav-item .nav-link.active::after {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+nav.navbar .container .navbar-collapse .search input.form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 5px var(--main-color-alpha);
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item {
+    color: #3e3e3e;
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:nth-of-type(1),
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:nth-of-type(2) {
+    position: relative;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:nth-of-type(1) span,
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:nth-of-type(2) span {
+    width: 25px;
+    height: 25px;
+    background: var(--main-color);
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -22px;
+    right: -10px;
+}
+
+nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:hover {
+    color: var(--main-color);
+}
+/* _______________________________________________________ End_Navbar _______________________________________________________ */
+
+
+/* _______________________________________________________ Start_Header _______________________________________________________ */
+#Home #Special-Carousel {
+    position: relative;
+}
+
+#Home #Special-Carousel .special-carousel-inner {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item,
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container,
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container>.row {
+    height: 100%;
+}
+
+#Home #Special-Carousel>button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.5s;
+    z-index: 10;
+}
+
+#Home #Special-Carousel button.prev {
+    left: 40px;
+}
+
+#Home #Special-Carousel button.next {
+    right: 40px;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item.active1 {
+    z-index: 5;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item:nth-of-type(1) {
+    background-image: url("../images/home-bg-1.jpg");
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item:nth-of-type(2) {
+    background-image: url("../images/home-bg-2.jpg");
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item:nth-of-type(3) {
+    background-image: url("../images/home-bg-3.jpg");
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: 1s 0.5s;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item.active2 .container .row .part1 {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item h5 {
+    color: var(--main-color);
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item h2 {
+    color: var(--main-color-dark);
+    font-size: 50px;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item p {
+    width: 75%;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part1 .item p {
+    width: 75%;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:first-child {
+    transform: translate(-10%, -100%);
+    opacity: 0;
+    width: 75%;
+    transition-duration: 1s;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item.active2 .container .row .part2 .item img:first-child {
+    transform: translate(-10%, -20%);
+    opacity: 1;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item .container .row .part2 .item img:last-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+    width: 95%;
+    opacity: 0;
+    transition-duration: 1s;
+}
+
+#Home #Special-Carousel .special-carousel-inner .special-carousel-item.active2 .container .row .part2 .item img:last-child {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(1);
+    opacity: 1;
+}
+
+/* _______________________________________________________ End_Header _______________________________________________________ */
+
+
+/* _______________________________________________________ Start_Offers _______________________________________________________ */
+#Offers .row {
+    background-color: #000;
+}
+
+#Offers .row .item {
+    overflow: hidden;
+    position: relative;
+}
+
+#Offers .row .item img {
+    transition-duration: 1s;
+    transform: scale(1.1);
+}
+
+#Offers .row .item:hover img {
+    transform: scale(1);
+}
+
+#Offers .row .item::after {
+    content: '';
+    display: block;
+    width: 130%;
+    height: 100%;
+    position: absolute;
+    top: -10%;
+    left: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(45deg);
+    transition-duration: 1s;
+}
+
+#Offers .row .item:hover::after {
+    top: 10%;
+    left: -120%;
+}
+
+/* _______________________________________________________ End_Offers _______________________________________________________ */
+
+
+/* _______________________________________________________ Start_Latest _______________________________________________________ */
+#Latest .container .content .product:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+#Latest .container .content .product .row1 {
+    background-color: #fff;
+    padding: 20px 8px;
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul {
+    width: 90px;
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul li img {
+    transform: scale(0.7);
+    transition-duration: 0.5s;
+
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box1 .item ul li:hover img {
+    transform: scale(0.9);
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box2 .item .selectedImg img {
+    width: 60%;
+    transition-duration: 0.5s;
+}
+
+#Latest .container .content .product .row1 .part1 .item .row2 .box2 .item .selectedImg img:hover {
+    transform: scale(1.2);
+}
+
+#Latest .container .content .product .row1 .part2 .item>*:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+/* _______________________________________________________ End_Latest _______________________________________________________ */
+
+
+/* _______________________________________________________ Start_Featured _______________________________________________________ */
+#Featured .container .content .row .product .item {
+    height: 100%;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.5s;
+}
+
+#Featured .container .content .row .product .item .favorite {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+#Featured .container .content .row .product .item .notice-bar {
+    position: absolute;
+    top: 10px;
+    left: -100%;
+    z-index: 5;
+    border-radius: 0 5px 5px 0;
+    background: var(--main-color-light);
+    color: var(--main-color);
+    font-weight: 700;
+    padding: 0 5px;
+    transition: left 0.8s;
+}
+
+#Featured .container .content .row .product .item:hover .notice-bar {
+    left: 0;
+}
+
+#Featured .container .content .row .product .item .offer {
+    position: absolute;
+    top: 20px;
+    left: -30px;
+    transform: translateX(50%) rotate(45deg);
+
+    width: 100%;
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: 14px;
+}
+
+#Featured .container .content .row .product .item .head .selectedImg img {
+    transition-duration: 0.5s;
+    transform: scale(0.9);
+    /* transform-origin: top; */
+}
+
+#Featured .container .content .row .product .item:hover .head .selectedImg img {
+    transform: scale(1.15);
+}
+
+#Featured .container .content .row .product .item .head .search {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    background-color: #fff;
+    color: var(--main-color);
+    box-shadow: 0 10px 15px #0003;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+#Featured .container .content .row .product .item .head .search:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+#Featured .container .content .row .product .item:hover .head .search {
+    transition: all 0.5s, transform 0.5s 0.3s, opacity 0.5s 0.3s;
+    transform: translateY(-35px);
+    opacity: 1;
+}
+
+#Featured .container .content .row .product .item .head ul {
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#Featured .container .content .row .product .item:hover .head ul {
+    transition-property: transform, opacity;
+    transition-delay: 0.5s;
+    transform: translateY(-15px);
+    opacity: 1;
+}
+
+#Featured .container .content .row .product .item .head ul li {
+    width: 15px;
+    height: 15px;
+}
+
+#Featured .container .content .row .product .item .head ul li.active {
+    background-color: var(--main-color);
+}
+
+/* _______________________________________________________ End_Featured _______________________________________________________ */
+
+
+/* _______________________________________________________ Start_Footer _______________________________________________________ */
+footer {
+    background-color: #333333;
+    color: #fff;
+}
+
+footer p span {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    font-family: Agency FB, sans-serif;
+}
+
+/* _______________________________________________________ End_Footer _______________________________________________________ */
+
+
+/* _______________________________________________________ popup _______________________________________________________ */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+
+    display: none;
+}
+
+.popup .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.popup[data-popup-name="shop"] .container,
+.popup[data-popup-name="favorites"] .container {
+    align-items: start;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup .box {
+    background: rgba(255, 255, 255, 0.8);
+
+    border: 3px solid var(--main-color);
+
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+
+    transform: translateY(-200%);
+    opacity: 0;
+
+    transition: 0.5s;
+}
+
+.popup.show .box {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+/* ----------------------------------- */
+.popup[data-popup-name="shop"] .box,
+.popup[data-popup-name="favorites"] .box {
+    width: 750px;
+    transform: translateY(-120%);
+    margin: 20px auto;
+    white-space: nowrap;
+}
+
+.popup[data-popup-name="shop"].show .box,
+.popup[data-popup-name="favorites"].show .box {
+    transform: translateY(0%);
+}
+
+.popup[data-popup-name="shop"] .box .row .item .caption>*:not(:last-child),
+.popup[data-popup-name="favorites"] .box .row .item .caption>*:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.popup[data-popup-name="shop"] .box .row .item .caption .product-name h5,
+.popup[data-popup-name="favorites"] .box .row .item .caption .product-name h5 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup[data-popup-name="shop"] .box .row .item button,
+.popup[data-popup-name="favorites"] .box .row .item button {
+    background-color: var(--main-color);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: 0.5s;
+}
+
+.popup[data-popup-name="shop"] .box .row .item button:hover,
+.popup[data-popup-name="favorites"] .box .row .item button:hover {
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+
+.popup[data-popup-name="shop"] .box>button.btn-buy,
+.popup[data-popup-name="favorites"] .box>button.btn-buy {
+
+    background-color: #fff;
+    color: var(--main-color);
+    box-shadow: var(--main-color-alpha) 0 0 20px 20px inset;
+    border: 1px solid var(--main-color);
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+.popup[data-popup-name="shop"] .box>button.btn-buy:hover,
+.popup[data-popup-name="favorites"] .box>button.btn-buy:hover {
+    background-color: var(--main-color);
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+/* ----------------------- */
+.popup[data-popup-name="favorites"] .box .row .item {
+    position: relative;
+    overflow: hidden;
+}
+
+.popup[data-popup-name="favorites"] .box .row .item .notice {
+    position: absolute;
+    top: 10px;
+    left: -100%;
+    z-index: 5;
+    border-radius: 0 5px 5px 0;
+    background: var(--main-color-light);
+    color: var(--main-color);
+    font-weight: 700;
+    padding: 0 10px;
+    transition: left 0.8s;
+}
+
+.popup[data-popup-name="favorites"] .box .row .item:hover .notice {
+    left: 0%;
+}
+
+.popup[data-popup-name="favorites"] .box .row .item .caption ul li {
+    cursor: default;
+}
+
+/* ----------------------------------- */
+.popup[data-popup-name="login"] .box form .group .form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 5px var(--main-color-alpha);
+}
+
+.popup[data-popup-name="login"] .box form .group:nth-of-type(2) {
+    position: relative;
+}
+
+.popup[data-popup-name="login"] .box form .group:nth-of-type(2) i {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+}
+
+.popup[data-popup-name="login"] .box form .group button {
+    background-color: var(--main-color);
+    color: #fff;
+    letter-spacing: 0.5px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+.popup[data-popup-name="login"] .box form .group button:hover {
+    letter-spacing: 2.5px;
+}
+
+/* ----------------------------------- */
+.popup[data-popup-name="product"] .box {
+    width: 750px;
+}
+
+.popup[data-popup-name="product"] .box .row .part2 .item .size {
+    margin-bottom: 15px;
+}
+
+.popup[data-popup-name="product"] .box .row .part2 .item .color {
+    margin-bottom: 20px;
+}
+
+/* --------------------------------------- */
+.popup .box .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.popup .box hr {
+    border-top: var(--main-color) solid;
+}
