@@ -53,46 +53,48 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <!-- <div class="burger_menu"> -->
                 <span></span>
                 <span></span>
                 <span></span>
-                <!-- </div> -->
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="d-flex justify-content-evenly align-items-center w-100">
-                    <ul class="navbar-nav column-gap-3 mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#Home">Home</a>
+                <div class="wrapper p-3 d-flex flex-column align-items-center row-gap-5 row-gap-lg-0 flex-lg-row  w-100">
+                    <div class="d-flex flex-column row-gap-3 row-gap-lg-0 flex-lg-row justify-content-evenly align-items-center w-100">
+                        <ul class="navbar-nav gap-3 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#Home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Latest">Latest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Featured">Featured</a>
+                            </li>
+                        </ul>
+
+                        <form class="search d-flex mb-lg-0" role="search">
+                            <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                                aria-label="Search" />
+                            <button class="btn btn-search btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <ul class="navbar-nav flex-row justify-content-center column-gap-4 column-gap-lg-3 ms-0 ms-lg-auto mb-lg-0">
+                        <li class="nav-item" id="Favorites" onclick="showFavoritesProducts()">
+                            <i class="fa-solid fa-heart"></i>
+                            <span class="d-none"></span>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#Latest">Latest</a>
+                        <li class="nav-item" id="Cart" onclick="showCartProducts()">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="d-none"></span>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#Featured">Featured</a>
+                        <li class="nav-item" onclick="openPopup('login')">
+                            <i class="fa-solid fa-user"></i>
                         </li>
                     </ul>
-
-                    <div class="search d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-search btn-outline-success">Search</button>
-                    </div>
                 </div>
-                <ul class="navbar-nav column-gap-3 ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item" id="Favorites" onclick="showFavoritesProducts()">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>20</span>
-                    </li>
-                    <li class="nav-item" id="Cart" onclick="showCartProducts()">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span>1</span>
-                    </li>
-                    <li class="nav-item" onclick="openPopup('login')">
-                        <i class="fa-solid fa-user"></i>
-                    </li>
-                </ul>
             </div>
+
         </div>
     </nav>
     <!-- _______________________________________________________ End_Navbar _______________________________________________________ -->
@@ -115,7 +117,7 @@
                                     <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Repellat Maiores Et Eos
                                         Eaque Veritatis Aut Laboriosam Earum
                                         Dolorem Iste Atque.</p>
-                                    <button class="btn mainButton">See More</button>
+                                    <button class="btn main-button">See More</button>
                                 </div>
                             </div>
                             <div class="part2 col-md-6">
@@ -140,7 +142,7 @@
                                     <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Repellat Maiores Et Eos
                                         Eaque Veritatis Aut Laboriosam Earum
                                         Dolorem Iste Atque.</p>
-                                    <button class="btn mainButton">See More</button>
+                                    <button class="btn main-button">See More</button>
                                 </div>
                             </div>
                             <div class="part2 col-md-6">
@@ -165,7 +167,7 @@
                                     <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Repellat Maiores Et Eos
                                         Eaque Veritatis Aut Laboriosam Earum
                                         Dolorem Iste Atque.</p>
-                                    <button class="btn mainButton">See More</button>
+                                    <button class="btn main-button">See More</button>
                                 </div>
                             </div>
                             <div class="part2 col-md-6">
@@ -181,8 +183,8 @@
 
             </div>
             <!--? ---------------------------- Prev & Next ---------------------------- -->
-            <button class="btn mainButton rounded-circle prev"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="btn mainButton rounded-circle next"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="btn main-button rounded-circle prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="btn main-button rounded-circle next"><i class="fa-solid fa-chevron-right"></i></button>
 
         </div>
     </header>
@@ -239,7 +241,7 @@
 
     <!-- _______________________________________________________ Start_Footer _______________________________________________________ -->
     <footer class="py-2 text-center">
-        <p class="m-0">&copy; 2021 <span class="mainColor">SemiCode</span>, Ltd. | All Rights Reserved .</p>
+        <p class="m-0">&copy; 2021 <span class="main-color">SemiCode</span>, Ltd. | All Rights Reserved .</p>
     </footer>
     <!-- _______________________________________________________ End_Footer _______________________________________________________ -->
 
@@ -249,20 +251,35 @@
         <img src="images/nike.gif" class="img-fluid w-50" alt="loading">
     </div>
 
+    <!-- _______________________________________________________ Popup_Search_______________________________________________________ -->
+    <div class="popup" data-popup-name="search" onclick="closePopup(); focusOnSearch()">
+        <div class="container">
+            <div class="box bg-light">
+                <div class="title d-flex justify-content-between">
+                    <h5 class=" fw-bold">No result</h5>
+                    <i class="fa-solid fa-x main-color" onclick="closePopup(); focusOnSearch()"></i>
+                </div>
+                <hr>
+                <p class="message-search fw-bold"></p>
+                <hr>
+                <button class="btn d-block ms-auto" onclick="closePopup(); focusOnSearch()">OK</button>
+            </div>
+        </div>
+    </div>
 
     <!-- _______________________________________________________ Popup_Favorites_______________________________________________________ -->
     <div class="popup" data-popup-name="favorites" onclick="closePopup()">
         <div class="container">
             <div class="box">
-                <div class="close mainColor fs-4" onclick="closePopup()">
+                <div class="close main-color fs-4" onclick="closePopup()">
                     <i class="fa-regular fa-circle-xmark"></i>
                 </div>
-                <div class="title text-center mainColor mb-5">
+                <div class="title text-center main-color mb-5">
                     <h2>Favorites</h2>
                 </div>
                 <div class="alert-empty"></div>
                 <div class="row row-gap-3"></div>
-                <button class="btn btn-buy w-100 mt-4">Buy Now</button>
+                <!-- <button class="btn btn-buy w-100 mt-4">Buy Now</button> -->
             </div>
         </div>
     </div>
@@ -271,10 +288,10 @@
     <div class="popup" data-popup-name="shop" onclick="closePopup()">
         <div class="container">
             <div class="box">
-                <div class="close mainColor fs-4" onclick="closePopup()">
+                <div class="close main-color fs-4" onclick="closePopup()">
                     <i class="fa-regular fa-circle-xmark"></i>
                 </div>
-                <div class="title text-center mainColor mb-5">
+                <div class="title text-center main-color mb-5">
                     <h2>Shop</h2>
                 </div>
                 <div class="alert-empty"></div>
@@ -288,10 +305,10 @@
     <div class="popup" data-popup-name="login" onclick="closePopup()">
         <div class="container">
             <div class="box">
-                <div class="close mainColor fs-4" onclick="closePopup()">
+                <div class="close main-color fs-4" onclick="closePopup()">
                     <i class="fa-regular fa-circle-xmark"></i>
                 </div>
-                <div class="title text-center mainColor mb-5">
+                <div class="title text-center main-color mb-5">
                     <h2>Login</h2>
                 </div>
                 <form method="post">
@@ -301,10 +318,10 @@
                     <div class="group">
                         <input type="password" name="password" placeholder="Password *" required
                             class="form-control mb-3">
-                        <i class="fa-solid fa-eye-slash d-none mainColor"></i>
+                        <i class="fa-solid fa-eye-slash d-none main-color"></i>
                     </div>
                     <div class="group">
-                        <button class="btn w-100">Login</button>
+                        <button class="btn w-100" type="submit">Login</button>
                     </div>
                 </form>
             </div>
