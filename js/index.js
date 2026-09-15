@@ -2,7 +2,6 @@
 //! __________________________________________ Global_Variables __________________________________________
 
 let btnPrevCarousel = document.querySelector("#Special-Carousel button.prev"),
-	// btnNextCarousel = document.querySelector("#Special-Carousel button.next");
 	btnNextCarousel = btnPrevCarousel.nextElementSibling,
 	slideContainer = document.querySelector("#Special-Carousel .special-carousel-inner"),
 	firstSlide = slideContainer.querySelector(".special-carousel-item"),
@@ -20,23 +19,38 @@ let btnPrevCarousel = document.querySelector("#Special-Carousel button.prev"),
 	cartProducts = [],
 	mainColorName = 'first',
 	inputPassword = document.querySelector(".popup[data-popup-name='login'] .box form .group:nth-of-type(2) input"),
-	favoriteProducts = [];
+	favoriteProducts = [],
+	formSearch = nav.querySelector(".search"),
+	inputSearch = formSearch.firstElementChild,
+	btnSearch = inputSearch.nextElementSibling,
+	favoritesCounter = 0,
+	cartCounter = 0;
 
-checkScrolledNav();
+
+checkNavOnScroll();
 
 //! __________________________________________ CartProducts_Local_Storage __________________________________________
+
 if (localStorage.getItem("cartProducts")) {
 	cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
 } else {
 	updateCartProductsStorage();
 }
 
+cartCounter = cartProducts.length;
+updateCounter('cart', cartCounter);
+
 //! __________________________________________ favoriteProducts_Local_Storage __________________________________________
+
 if (localStorage.getItem("favoriteProducts")) {
 	favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts"));
+
 } else {
 	updateFavoriteProductsStorage();
 }
+
+favoritesCounter = favoriteProducts.length;
+updateCounter('favorites', favoritesCounter);
 
 //! __________________________________________ MainColorName_Local_Storage __________________________________________
 
@@ -53,7 +67,6 @@ let currentSlide = document.querySelector(`.special-carousel-item[data-color-nam
 currentSlide.classList.add("active1");
 applyColorTheme(mainColorName);
 
-
 //! __________________________________________ Loading_Page __________________________________________
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -64,6 +77,61 @@ window.addEventListener("DOMContentLoaded", function () {
 		currentSlide.classList.add("active2");
 
 	}, 1000);
+});
+
+//! __________________________________________ Form_Search  __________________________________________
+
+formSearch.addEventListener('submit', function (e) {
+	e.preventDefault();
+	let inputSearchValue = inputSearch.value.trim(),
+		existProducts = [],
+		isExist = false;
+
+	if (inputSearchValue != '') {
+
+		for (let product of products) {
+
+			// (includes) return true or false
+			isExist = product.name.toLowerCase().includes(inputSearchValue.toLowerCase());
+
+			if (isExist) {
+				let productEle = document.querySelector(`#Latest .product[data-product-id='${product.id}'], #Featured .product[data-product-id='${product.id}']`);
+
+				existProducts.push(productEle);
+
+				productEle.firstElementChild.classList.replace("bg-light", "bg-success-subtle");
+			}
+		}
+
+		if (existProducts.length != 0) {
+
+			// Bring the product into the visible area and center it vertically in the viewport;
+			// if it is already visible and centered, no scrolling is needed
+			existProducts[0].scrollIntoView({ block: "center" });
+
+			// Check (to remove highlight from first exist product) after scrollIntoView() scrolls to the product
+			window.addEventListener('scroll', function () {
+				console.log("scroll");
+				checkProductOnScroll(existProducts);
+			});
+
+			// Check (to remove highlight from first exist product) in case the product is already in the correct position,
+			// because scrollIntoView() will not trigger the scroll event if no scrolling is needed
+			checkProductOnScroll(existProducts);
+
+		} else {
+			let messageSearch = document.querySelector(`.popup[data-popup-name="search"] .box p.message-search`);
+			messageSearch.textContent = "Please try in different words";
+			openPopup('search');
+		}
+
+	} else {
+		let messageSearch = document.querySelector(".popup[data-popup-name='search'] .box p.message-search");
+		messageSearch.textContent = "Please write something to search";
+		openPopup('search');
+	}
+
+	formSearch.reset();
 });
 
 //! __________________________________________ Next_Carousel __________________________________________
@@ -99,15 +167,19 @@ btnPrevCarousel.addEventListener("click", function () {
 document.addEventListener("keyup", function (e) {
 	if (e.key == "ArrowRight") {
 		btnNextCarousel.click();
+
 	} else if (e.key == "ArrowLeft") {
 		btnPrevCarousel.click();
+
+	} else if (e.key == "Escape" && document.querySelector(".popup.active")) {
+		closePopup();
 	}
 });
 
 //! __________________________________________ Scroll __________________________________________
 
 window.addEventListener("scroll", function () {
-	checkScrolledNav();
+	checkNavOnScroll();
 
 	sections.forEach(function (section) {
 		updateNavLink(section.id);
@@ -118,13 +190,10 @@ navLinks.forEach(function (navLink) {
 	navLink.addEventListener("click", function (e) {
 		e.preventDefault();
 
-		let navLinkActivated = nav.querySelector(
-			".navbar-nav:first-child .nav-link.active",
-		),
-			currentId = navLink.getAttribute("href"),
+		let currentId = navLink.getAttribute("href"),
 			currentSection = document.querySelector(currentId),
 			topOfSection = currentSection.offsetTop;
-		
+
 		window.scrollTo({
 			top: topOfSection - navHight + 3,
 			left: 0,
@@ -144,7 +213,7 @@ latest.forEach(function (product) {
             data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}"
             data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}">
             
-            <div class="row row-gap-md-5 row1 mainBorder rounded-2 mx-0">
+            <div class="row row-gap-md-5 row1 bg-light mainBorder rounded-2 mx-0">
                 <div class="part1 col-lg-6">
                     <div class="item  h-100">
 
@@ -169,7 +238,7 @@ latest.forEach(function (product) {
                 </div>
                 <div class="part2 col-lg-6">
                     <div class="item">
-                        <h3 class="mainColor">${product.name}</h3>
+                        <h3 class="main-color">${product.name}</h3>
 
                         <p class="text-secondary">${product.description}</p>
 
@@ -182,7 +251,7 @@ latest.forEach(function (product) {
                             </div>
                         </div>
 
-                        <div class="size d-flex column-gap-2">
+                        <div class="size d-flex align-items-center column-gap-2">
                             <div class="label">
                                 <h6 class="m-0">Size :</h6>
                             </div>
@@ -194,8 +263,8 @@ latest.forEach(function (product) {
                         </div>
 
                         ${isProductIntoCart
-			? `<button class="btn mainButton remove" onclick="removeFromCart(${product.id},this)">Remove From Cart</button>`
-			: `<button class="btn mainButton" onclick="addToCart(${product.id},this)">Add To Cart</button>`
+			? `<button class="btn main-button remove" onclick="removeFromCart(${product.id},this)">Remove From Cart</button>`
+			: `<button class="btn main-button" onclick="addToCart(${product.id},this)">Add To Cart</button>`
 		}
     
                     </div>
@@ -220,18 +289,16 @@ features.forEach(function (product) {
 			   </div>
 
 			   ${(isProductInFavorites)
-			?
-			`<div class="notice-bar" style="left:0">
-						<p class="mb-0">Saved to favorites <i class="fa-solid fa-heart"></i></p>
-					</div>`
 
-			:
-			`<div class="notice-bar" >
-						<p class="mb-0">Double-tap to favorite</p>
-					</div>`
+			? ` <div class="notice-bar" style="left:0">
+					<p class="mb-0">Saved to favorites <i class="fa-solid fa-heart"></i></p>
+				</div>`
+
+			: ` <div class="notice-bar" >
+					<p class="mb-0">Double-tap to favorite</p>
+				</div>`
 		}
 				
-
                 <div class="offer text-center ${product.discount == 0 ? "d-none" : ""}">-${product.discount * 100}%</div>
                 
 				<div class="head">
@@ -283,5 +350,28 @@ inputPassword.nextElementSibling.addEventListener('click', function () {
 
 	}
 });
+
+//! __________________________________________ ??????????????????????????????  __________________________________________
+
+
+// let popupBoxes = document.querySelectorAll(".popup .box");
+
+// popupBoxes.forEach(function (popupBox) {
+
+// 	popupBox.onclick = function (e) {
+// 		e.stopPropagation();
+// 	};
+
+// });
+
+
+
+
+
+
+
+
+
+
 
 

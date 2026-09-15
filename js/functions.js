@@ -14,6 +14,27 @@ function updateColorNameStorage(colorName) {
 }
 
 //! _____________________________________________
+function updateCounter(type, counter) {
+
+	let counterContainer;
+
+	if (type == 'cart') {
+		counterContainer = nav.querySelector("#Cart");
+
+	} else if (type == 'favorites') {
+		counterContainer = nav.querySelector("#Favorites");
+	}
+	// -----------------
+	if (counter <= 0) {
+		counterContainer.lastElementChild.classList.add("d-none");
+
+	} else {
+		counterContainer.lastElementChild.classList.remove("d-none");
+		counterContainer.lastElementChild.textContent = `${counter}`;
+	}
+}
+
+//! _____________________________________________
 function changeMainColor(colorName) {
 	let rootEle = document.querySelector("html"),
 
@@ -60,11 +81,30 @@ function applyColorTheme(colorName) {
 }
 
 //! _____________________________________________
-function checkScrolledNav() {
+function checkNavOnScroll() {
 	if (window.scrollY > 10) {
 		nav.classList.add("scrolled");
 	} else {
 		nav.classList.remove("scrolled");
+	}
+}
+
+//! _____________________________________________
+function checkProductOnScroll(existProducts) {
+
+	let scrollYToCenterProduct = (existProducts[0].offsetTop) - (window.innerHeight / 2) + (existProducts[0].clientHeight / 2),
+		maxScrollY = body.offsetHeight - window.innerHeight;
+
+	// When the scroll reaches the position that centers the product || when product in the bottom of the page
+	if ((Math.abs(window.scrollY - scrollYToCenterProduct) < 1) || (window.scrollY == maxScrollY)) {
+
+		setTimeout(function () {
+
+			existProducts.forEach(function (productEle) {
+				productEle.firstElementChild.classList.replace("bg-success-subtle", "bg-light");
+			});
+
+		}, 800);
 	}
 }
 
@@ -75,10 +115,8 @@ function updateNavLink(sectionId) {
 		sectionHeight = section.clientHeight,
 		sectionBottom = sectionTop + sectionHeight;
 
-	if (
-		window.scrollY > sectionTop - navHight &&
-		window.scrollY < sectionBottom
-	) {
+	if (window.scrollY > sectionTop - navHight && window.scrollY < sectionBottom) {
+
 		let navLinkOfSection = document.querySelector(`a[href="#${sectionId}"]`),
 			navLinkActivated = nav.querySelector(".nav-link.active");
 
@@ -115,7 +153,7 @@ function prepareFeaturedImgList(images) {
 function preparePrice(price, discount) {
 	return `
         <p class="m-0">
-            <span class="text-decoration-line-through mainColor ${discount == 0 ? "d-none" : ""}">${price} <sup>$</sup></span>
+            <span class="text-decoration-line-through main-color ${discount == 0 ? "d-none" : ""}">${price} <sup>$</sup></span>
             <span>${(price * (1 - discount)).toFixed(2)} <sup>$</sup></span>
         </p>
     `;
@@ -131,7 +169,7 @@ function prepareSize(sizes, isProductIntoCart = null, isProductIntoFavorites = n
                         onclick = "changeActive(this); updateSize('${size}', this)">${size}</li>`;
 
 		} else if (isProductIntoFavorites) {
-			liElements += `<li class="mainButton rounded-circle">${size}</li>`;
+			liElements += `<li class="main-button rounded-2">${size}</li>`;
 
 		} else {
 			liElements += `<li class="mainBorder rounded-2 ${index == 0 ? 'active' : ''}" 
@@ -184,7 +222,23 @@ function changeActive(that) {
 
 //! _____________________________________________
 function openPopup(popupName) {
+
 	popup = document.querySelector(`[data-popup-name="${popupName}"]`);
+
+	popupBox = popup.querySelector(".box");
+	popupBox.onclick = function (e) {
+		e.stopPropagation();
+	};
+
+	// The reason of (scrollTo the display:none element)  not work,
+	// is that the element does not take any space between rendered elements - 
+	// there's no X or Y position on the window that this element actually exist, 
+	// so there's no value to scrollTo!
+	//* popup.firstElementChild.scrollTo(0, 0);   // not work
+
+	if (popup.classList.contains("show")) {
+		popup.classList.remove("show");
+	}
 
 	// Reset the form and password visibility to the default state when reopening the login popup
 	if (popupName == 'login') {
@@ -198,14 +252,14 @@ function openPopup(popupName) {
 	}
 
 	popup.classList.add("active");
+
+	// If the popup was scrolled to the bottom, close it, then open it again,
+	// it will keep the previous scroll position, so reset it to the top
+	popup.firstElementChild.scrollTo(0, 0);
+
 	setTimeout(function () {
 		popup.classList.add("show");
-	}, 1);
-
-	popupBox = popup.querySelector(".box");
-	popupBox.onclick = function (e) {
-		e.stopPropagation();
-	};
+	}, 100);
 }
 
 //! _____________________________________________
@@ -217,6 +271,7 @@ function closePopup() {
 		popup.classList.remove("active");
 	}, 500);
 }
+
 
 //! _____________________________________________
 function getProduct(productId) {
@@ -230,7 +285,7 @@ function showProduct(productId) {
 		isProductIntoCart = checkProductExists(cartProducts, product.id);
 
 	popupProductBox.innerHTML = `
-        <div class="close mainColor fs-4" onclick="closePopup()">
+        <div class="close main-color fs-4" onclick="closePopup()">
             <i class="fa-regular fa-circle-xmark"></i>
         </div>
 
@@ -279,10 +334,9 @@ function showProduct(productId) {
                     </div>
 
                     ${isProductIntoCart
-			? `<button class="btn mainButton remove" onclick="removeFromCart(${product.id}, this)">Remove From Cart</button>`
-			: `<button class="btn mainButton" onclick="addToCart(${product.id}, this)">Add To Cart</button>`
+			? `<button class="btn main-button remove" onclick="removeFromCart(${product.id}, this)">Remove From Cart</button>`
+			: `<button class="btn main-button" onclick="addToCart(${product.id}, this)">Add To Cart</button>`
 		}
-
 
                 </div>
             </div>
@@ -306,10 +360,11 @@ function addToCart(productId, that) {
 
 	cartProducts.push(newOrder);
 	updateCartProductsStorage();
-	console.log(cartProducts);
 
 	toggleOrderBtn("remove", that);
 	that.setAttribute("onclick", `removeFromCart(${productId},this)`);
+
+	updateCounter('cart', ++cartCounter);
 }
 
 
@@ -327,6 +382,8 @@ function removeFromCart(productId, that) {
 		toggleOrderBtn("add", that);
 		that.setAttribute("onclick", `addToCart(${productId},this)`);
 	}
+
+	updateCounter('cart', --cartCounter);
 }
 
 //! _____________________________________________
@@ -349,16 +406,11 @@ function removeProductFromShop(cartProductId) {
 	cartProduct.remove();
 
 	let buttonOfLatestProduct = document.querySelector(`#Latest .product[data-product-id = "${cartProductId}"] button.remove`);
-	console.log(buttonOfLatestProduct);
 
 	// to remove product from cart & reset button in Latest section
 	removeFromCart(cartProductId, buttonOfLatestProduct);
 
-	console.log(cartProducts);
-
 	if (cartProducts.length == 0) {
-		// cartAlertEmpty = document.querySelector(".popup[data-popup-name='shop'] .box .alert-empty");
-		// cartAlertEmpty.innerHTML = `<p class="alert alert-warning text-center mb-0">There are no products</p>`;
 		let cartProductsContainer = document.querySelector(".popup[data-popup-name='shop'] .box .row");
 		cartProductsContainer.previousElementSibling.innerHTML = `<p class="alert alert-warning text-center mb-0">There are no products</p>`;
 		cartProductsContainer.nextElementSibling.classList.add("d-none");
@@ -380,6 +432,7 @@ function updateColor(color, that) {
 //! _____________________________________________
 function showCartProducts() {
 	let cartProductsContainer = document.querySelector(".popup[data-popup-name='shop'] .box .row");
+	cartProductsContainer.innerHTML = ``;
 
 	if (cartProducts.length == 0) {
 		cartProductsContainer.previousElementSibling.innerHTML = `<p class="alert alert-warning text-center mb-0">There are no products</p>`;
@@ -390,9 +443,6 @@ function showCartProducts() {
 		cartProductsContainer.previousElementSibling.innerHTML = ``;
 		cartProductsContainer.nextElementSibling.classList.remove("d-none");
 
-
-
-		cartProductsContainer.innerHTML = ``;
 		cartProducts.forEach(function (cartProduct) {
 
 			let selectedProduct = getProduct(cartProduct.id);
@@ -483,9 +533,7 @@ function favoriteAnimate(productFeaturedItem) {
 	setTimeout(function () {
 		favoriteImg.parentElement.classList.add('d-none');
 	}, 500);
-
 }
-
 
 //! _____________________________________________
 
@@ -493,22 +541,21 @@ function addToFavorites(productId, productFeaturedItem) {
 
 	let noticeMessage = productFeaturedItem.querySelector(".notice-bar p");
 
-
 	favoriteAnimate(productFeaturedItem);
 	productFeaturedItem.classList.add("favorite-item");
 	noticeMessage.innerHTML = 'Saved to favorites <i class="fa-solid fa-heart"></i>';
 
 	noticeMessage.parentElement.setAttribute('style', 'left:0');
 
-	//* ---------------------------------------
+	//* -------------------------
 
 	let product = getProduct(productId);
 	favoriteProducts.push(product);
 	updateFavoriteProductsStorage();
 
-	console.log(favoriteProducts);
-
 	productFeaturedItem.setAttribute("ondblclick", `removeFromFavorites(${productId},this)`);
+
+	updateCounter('favorites', ++favoritesCounter);
 }
 
 
@@ -516,37 +563,37 @@ function addToFavorites(productId, productFeaturedItem) {
 
 function removeFromFavorites(productId, productFeaturedItem) {
 
-	console.log("**************************");
-
 	let noticeMessage = productFeaturedItem.querySelector(".notice-bar p");
 
 	productFeaturedItem.classList.remove("favorite-item");
 	noticeMessage.innerHTML = 'Double-tap to favorite';
 	noticeMessage.parentElement.removeAttribute('style');
 
-	//* ---------------------------------------
+	//* -------------------------
 
 	favoriteProducts = removeItem(favoriteProducts, productId);
 	updateFavoriteProductsStorage();
 
 	productFeaturedItem.setAttribute("ondblclick", `addToFavorites(${productId},this)`);
+
+	updateCounter('favorites', --favoritesCounter);
 }
 
 
 //! _____________________________________________
 function showFavoritesProducts() {
 	let favoriteProductsContainer = document.querySelector(".popup[data-popup-name='favorites'] .box .row");
+	favoriteProductsContainer.innerHTML = ``;
 
 	if (favoriteProducts.length == 0) {
 		favoriteProductsContainer.previousElementSibling.innerHTML = `<p class="alert alert-warning text-center mb-0">There are no favorites</p>`;
-		favoriteProductsContainer.nextElementSibling.classList.add("d-none");
+		// favoriteProductsContainer.nextElementSibling.classList.add("d-none");
 
 	} else {
 
 		favoriteProductsContainer.previousElementSibling.innerHTML = ``;
-		favoriteProductsContainer.nextElementSibling.classList.remove("d-none");
+		// favoriteProductsContainer.nextElementSibling.classList.remove("d-none");
 
-		favoriteProductsContainer.innerHTML = ``;
 		favoriteProducts.forEach(function (favoriteProduct) {
 
 			favoriteProductsContainer.innerHTML += `
@@ -574,7 +621,7 @@ function showFavoritesProducts() {
 	
 							<div class="size d-flex align-items-center column-gap-2">
 								<div class="label">
-									<h6 class="m-0">Sizes :</h6>
+									<h6 class="m-0">Size :</h6>
 								</div>
 								<div class="value">
 									<ul class="list-unstyled d-flex column-gap-2 m-0">
@@ -585,7 +632,7 @@ function showFavoritesProducts() {
 	
 							<div class="color d-flex align-items-center column-gap-2">
 								<div class="label">
-									<h6 class="mb-0">Colors :</h6>
+									<h6 class="mb-0">Color :</h6>
 								</div>
 								<div class="value">
 									<ul class="list-unstyled d-flex column-gap-2 m-0">
@@ -612,13 +659,7 @@ function removeProductFromFavorites(productId, btnRemoveFavorite) {
 
 	let productItem = document.querySelector(`#Featured .product[data-product-id = "${productId}"]>.favorite-item`);
 
-
-	console.log(productItem);
-	console.log("============================================");
-
 	removeFromFavorites(productId, productItem);
-
-	console.log(favoriteProducts);
 
 	if (favoriteProducts.length == 0) {
 		favoriteAlertEmpty = document.querySelector(".popup[data-popup-name='favorites'] .box .alert-empty");
@@ -627,13 +668,39 @@ function removeProductFromFavorites(productId, btnRemoveFavorite) {
 	}
 }
 
-
 //! _____________________________________________
-
 function viewProductFromFavorites(productId) {
 	closePopup();
 
+	let popupProduct = document.querySelector(".popup[data-popup-name='product']");
+
 	setTimeout(function () {
 		showProduct(productId);
-	}, 700);
+
+		popupProduct.setAttribute("onclick", "returnToFavorites()");
+		popupProduct.querySelector(".close").setAttribute("onclick", "returnToFavorites()");
+
+	}, 500);
 }
+
+//! _____________________________________________
+function returnToFavorites() {
+	closePopup();
+
+	let popupProduct = document.querySelector(".popup[data-popup-name='product']");
+
+	popupProduct.setAttribute("onclick", "closePopup()");
+	popupProduct.querySelector(".close").setAttribute("onclick", "closePopup()");
+
+	setTimeout(function () {
+		openPopup("favorites");
+	}, 500);
+}
+
+//! _____________________________________________
+function focusOnSearch() {
+	let inputSearch = nav.querySelector("form.search input");
+	inputSearch.focus();
+}
+
+

@@ -239,6 +239,6 @@ var latest = [
 ];
 
 var products = [
-    ...features,
-    ...latest
+    ...latest,
+    ...features
 ];
