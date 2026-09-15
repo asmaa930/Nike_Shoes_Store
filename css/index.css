@@ -102,6 +102,7 @@ nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:nth-of-t
 nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:hover {
     color: var(--main-color);
 }
+
 /* _______________________________________________________ End_Navbar _______________________________________________________ */
 
 
@@ -286,7 +287,6 @@ nav.navbar .container .navbar-collapse .navbar-nav:last-child .nav-item:hover {
 }
 
 #Latest .container .content .product .row1 {
-    background-color: #fff;
     padding: 20px 8px;
 }
 
@@ -498,9 +498,24 @@ footer p span {
     transition: 0.5s;
 }
 
+.popup[data-popup-name="search"] .box {
+    transform: translateY(-50%);
+}
+
 .popup.show .box {
     transform: translateY(0%);
     opacity: 1;
+}
+
+/* --------------------------------------- */
+.popup[data-popup-name="search"] .box i {
+    cursor: pointer;
+}
+
+.popup[data-popup-name="search"] .box button {
+    background-color: var(--main-color);
+    color: #fff;
+
 }
 
 /* ----------------------------------- */
@@ -606,6 +621,7 @@ footer p span {
     top: 50%;
     right: 12px;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .popup[data-popup-name="login"] .box form .group button {
