@@ -471,7 +471,13 @@ footer p span {
     align-items: center;
     justify-content: center;
     overflow: auto;
+    
     scrollbar-width: none;
+}
+
+/* fallback  for (scrollbar-width)*/
+.popup .container::-webkit-scrollbar {
+    width: 0;
 }
 
 .popup[data-popup-name="shop"] .container,
