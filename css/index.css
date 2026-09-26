@@ -604,7 +604,8 @@ footer p span {
     left: 0%;
 }
 
-.popup[data-popup-name="favorites"] .box .row .item .caption ul li {
+.popup[data-popup-name="favorites"] .box .row .item .caption ul li ,
+.popup[data-popup-name="shop"] .box .row .item .caption ul li {
     cursor: default;
 }
 

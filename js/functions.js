@@ -390,8 +390,10 @@ function removeFromCart(productId, that) {
 		buttonOfLatestProduct.setAttribute("onclick", `addToCart(${productId},this)`);
 	}
 
-	toggleOrderBtn("add", that);
-	that.setAttribute("onclick", `addToCart(${productId},this)`);
+	if (that) {
+		toggleOrderBtn("add", that);
+		that.setAttribute("onclick", `addToCart(${productId},this)`);
+	}
 
 	updateCounter('cart', --cartCounter);
 }
